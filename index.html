@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Education Portfolio — Britton James Werdell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+<style>
+  :root{
+    --ink:#10172A;
+    --ink-soft:#1B2440;
+    --paper:#F1ECDF;
+    --paper-2:#E8E1D0;
+    --rule:#2A3552;
+    --rule-paper:#4A4434;
+    --teal:#1F6E7B;
+    --terra:#B5532A;
+    --gold:#C9A24A;
+    --muted-ink:rgba(16,23,42,.55);
+    --muted-paper:rgba(241,236,223,.62);
+  }
+  html,body{margin:0;background:#0a0d18;color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  /* Slide base */
+  section{
+    box-sizing:border-box;
+    width:1920px;height:1080px;
+    padding:96px 120px 88px;
+    position:relative;
+    overflow:hidden;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+  }
+  section.ink{background:var(--ink);color:var(--paper);}
+  section.ink .meta-rule{border-color:rgba(241,236,223,.28);}
+  section.ink .label{color:rgba(241,236,223,.72);}
+  section.ink .num{color:var(--gold);}
+  section.ink .display{color:var(--paper);}
+  section.ink .body{color:rgba(241,236,223,.82);}
+  section.ink hr{border-color:rgba(241,236,223,.18);}
+
+  /* Header rail */
+  .rail{
+    position:absolute;top:0;left:0;right:0;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:42px 120px 0;
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted-ink);
+  }
+  section.ink .rail{color:rgba(241,236,223,.55);}
+  .rail .num{font-variant-numeric:tabular-nums;}
+  .rail .dot{width:6px;height:6px;border-radius:50%;background:var(--terra);display:inline-block;margin:0 14px 2px;vertical-align:middle;}
+  section.ink .rail .dot{background:var(--gold);}
+
+  /* Footer rail */
+  .footer{
+    position:absolute;bottom:42px;left:120px;right:120px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted-ink);
+  }
+  section.ink .footer{color:rgba(241,236,223,.5);}
+
+  /* Type system */
+  .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--rule-paper);font-weight:500;
+  }
+  .display{
+    font-family:'Instrument Serif',serif;
+    font-weight:400;
+    font-size:128px;line-height:0.96;letter-spacing:-.02em;
+    color:var(--ink);
+  }
+  .display.md{font-size:96px;}
+  .display.sm{font-size:72px;}
+  .body{
+    font-size:30px;line-height:1.45;color:var(--ink);font-weight:400;
+    text-wrap:pretty;
+  }
+  .body.lg{font-size:34px;}
+  .body.sm{font-size:26px;line-height:1.5;}
+  .small{font-size:24px;line-height:1.5;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .italic{font-style:italic;}
+
+  /* Section number */
+  .num-big{
+    font-family:'Instrument Serif',serif;
+    font-style:italic;
+    font-size:240px;line-height:0.9;
+    color:var(--terra);
+  }
+  section.ink .num-big{color:var(--gold);}
+
+  /* Common helpers */
+  .stack > * + *{margin-top:32px;}
+  .stack[style*="--gap:18px"] > * + *{margin-top:18px;}
+  .stack[style*="--gap:14px"] > * + *{margin-top:10px;}
+  .stack[style*="gap:0"] > * + *{margin-top:14px;}
+  .stack-sm > * + *{margin-top:16px;}
+  .stack-lg > * + *{margin-top:48px;}
+  hr.thin{border:none;border-top:1px solid var(--rule-paper);opacity:.4;margin:0;}
+  section.ink hr.thin{border-color:rgba(241,236,223,.25);opacity:.5;}
+
+  /* Two col */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:72px;}
+  .grid-2-asym{display:grid;grid-template-columns:5fr 7fr;gap:96px;}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:56px;}
+  .grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;}
+
+  .card{
+    background:transparent;border-top:1px solid var(--rule-paper);
+    padding-top:24px;
+  }
+  section.ink .card{border-color:rgba(241,236,223,.28);}
+  .card .kicker{
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--terra);margin-bottom:14px;
+  }
+  section.ink .card .kicker{color:var(--gold);}
+  .card .title{
+    font-family:'Instrument Serif',serif;
+    font-size:44px;line-height:1.05;margin-bottom:16px;color:var(--ink);
+  }
+  section.ink .card .title{color:var(--paper);}
+
+  /* Cover */
+  .cover-portrait{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(201,162,74,.10), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(181,83,42,.12), transparent 55%),
+      var(--ink);
+  }
+  .cover-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(241,236,223,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(241,236,223,.04) 1px, transparent 1px);
+    background-size:80px 80px;
+  }
+
+  /* TOC list */
+  .toc-row{
+    display:grid;grid-template-columns:90px 1fr auto;
+    align-items:baseline;
+    padding:22px 0;
+    border-bottom:1px solid rgba(241,236,223,.18);
+    font-family:'Instrument Serif',serif;
+    font-size:38px;
+  }
+  .toc-row .num{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:.1em;font-style:normal;}
+  .toc-row .pg{color:rgba(241,236,223,.45);font-family:'JetBrains Mono',monospace;font-size:20px;font-style:normal;}
+
+  /* Course table */
+  .course-row{
+    display:grid;grid-template-columns:280px 1fr;
+    gap:36px;padding:12px 0;
+    border-bottom:1px solid rgba(74,68,52,.25);
+    align-items:baseline;
+  }
+  .course-row .cat{
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--terra);
+  }
+  .course-row .courses{font-size:24px;line-height:1.55;color:var(--ink);}
+  .ref em{color:var(--muted-ink);}
+
+  /* Image placeholder striped */
+  .img-frame{
+    position:relative;width:100%;height:100%;
+    background:repeating-linear-gradient(135deg, rgba(74,68,52,.10) 0 12px, transparent 12px 24px), var(--paper-2);
+    border:1px solid var(--rule-paper);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--rule-paper);
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;letter-spacing:.16em;text-transform:uppercase;
+  }
+
+  /* Pull quote */
+  .pull{
+    font-family:'Instrument Serif',serif;font-style:italic;
+    font-size:64px;line-height:1.1;letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  section.ink .pull{color:var(--paper);}
+
+  /* Tag pill */
+  .tag{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;letter-spacing:.12em;text-transform:uppercase;
+    padding:8px 16px;
+    border:1px solid var(--rule-paper);
+    border-radius:999px;
+    margin:6px 8px 6px 0;
+    color:var(--ink);
+  }
+  section.ink .tag{border-color:rgba(241,236,223,.35);color:rgba(241,236,223,.85);}
+
+  /* Stat */
+  .stat-num{
+    font-family:'Instrument Serif',serif;
+    font-size:148px;line-height:1;letter-spacing:-.02em;
+    color:var(--ink);
+  }
+  section.ink .stat-num{color:var(--paper);}
+  .stat-num .accent{color:var(--terra);}
+  section.ink .stat-num .accent{color:var(--gold);}
+
+  /* Mindlock-style mock */
+  .mock{
+    background:#0c1220;border:1px solid rgba(241,236,223,.15);
+    border-radius:8px;padding:28px;
+    font-family:'JetBrains Mono',monospace;font-size:24px;line-height:1.6;
+    color:rgba(241,236,223,.85);
+  }
+  .mock .cmt{color:rgba(201,162,74,.7);}
+  .mock .agt{color:#9CC6CE;}
+  .mock .sys{color:rgba(241,236,223,.5);}
+  .mock .ok{color:#7FB069;}
+  .mock .warn{color:#D9874A;}
+
+  /* Photo */
+  .photo{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-frame{position:relative;overflow:hidden;background:#000;}
+  .photo-frame::after{
+    content:"";position:absolute;inset:0;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.2);
+  }
+
+  /* spec dot list */
+  ul.dots{list-style:none;padding:0;margin:0;}
+  ul.dots li{position:relative;padding-left:28px;margin-bottom:12px;font-size:24px;line-height:1.5;}
+  ul.dots li::before{
+    content:"";position:absolute;left:0;top:14px;width:8px;height:8px;
+    background:var(--terra);
+  }
+  section.ink ul.dots li::before{background:var(--gold);}
+
+  /* Right side vertical label */
+  .vside{
+    position:absolute;right:60px;top:50%;
+    transform:rotate(90deg) translateX(50%);
+    transform-origin:right center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--muted-ink);
+    white-space:nowrap;
+  }
+  section.ink .vside{color:rgba(241,236,223,.4);}
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+<!-- ============= 01 COVER ============= -->
+<section class="ink" data-label="01 Cover">
+  <div class="cover-portrait"></div>
+  <div class="cover-grid"></div>
+  <div class="rail" style="z-index:2;color:rgba(241,236,223,.55);">
+    <div><span class="num">01 / 17</span><span class="dot"></span>EDUCATION PORTFOLIO</div>
+    <div>ACA 122 · SPRING 2026</div>
+  </div>
+  <div style="position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-top:0;">
+    <div class="label" style="color:var(--gold);margin-bottom:36px;font-size:24px;">A Plan, A Practice, A Direction</div>
+    <h1 class="display" style="font-size:200px;line-height:.92;color:var(--paper);margin:0;">
+      Education<br/><em style="font-style:italic;color:var(--gold);">Portfolio.</em>
+    </h1>
+    <div style="margin-top:64px;display:grid;grid-template-columns:auto 1fr auto;gap:64px;align-items:end;border-top:1px solid rgba(241,236,223,.25);padding-top:32px;">
+      <div>
+        <div class="label" style="margin-bottom:10px;font-size:24px;">Author</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:42px;line-height:1.05;color:var(--paper);">Britton James Werdell</div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:10px;font-size:24px;">Field</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:42px;line-height:1.05;color:var(--paper);">Information Systems Engineering</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="label" style="margin-bottom:10px;font-size:24px;">Pathway</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:42px;line-height:1.05;color:var(--paper);">CFCC <span style="color:var(--gold);">→</span> UNCW</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 02 TOC / WHO I AM ============= -->
+<section class="ink" data-label="02 Who I Am">
+  <div class="rail"><div><span class="num">02 / 17</span><span class="dot"></span>SECTION I</div><div>WHO I AM</div></div>
+  <div class="grid-2-asym" style="height:100%;align-items:start;padding-top:60px;">
+    <div>
+      <div class="num-big">02</div>
+      <div class="label" style="color:var(--gold);margin-top:24px;">Introduction</div>
+      <h2 class="display" style="font-size:120px;margin:18px 0 0;color:var(--paper);">Who<br/>I Am.</h2>
+      <div style="margin-top:80px;display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+        <div>
+          <div class="label" style="margin-bottom:8px;">Now</div>
+          <div class="body" style="color:rgba(241,236,223,.85);">Cape Fear Community College</div>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px;">Next</div>
+          <div class="body" style="color:rgba(241,236,223,.85);">UNC Wilmington — B.S. ISE</div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <p class="body" style="color:rgba(241,236,223,.92);font-size:30px;">
+        I'm a student at Cape Fear Community College pursuing Information Systems Engineering, transferring to UNCW for a <em style="color:var(--gold);font-style:italic;">B.S. in Intelligent Systems Engineering</em>. My long-term goal is R&amp;D in cognitive systems and accessibility technology — building tools that improve the lives of others, particularly elderly and disabled communities.
+      </p>
+      <hr class="thin"/>
+      <p class="body sm" style="color:rgba(241,236,223,.78);">
+        My path into engineering is personal. My grandfather was an engineer, and I always admired him for it. After losing him to cancer, I redirected my focus toward the analytical and academic pursuits I'd previously set aside. Engineering felt like both a tribute to him and the right outlet for the way my mind actually works.
+      </p>
+      <hr class="thin"/>
+      <p class="body sm" style="color:rgba(241,236,223,.78);">
+        To support myself through school, I work as a tattoo artist — a creative discipline I've practiced for years that keeps me grounded between the technical and the artistic sides of who I am.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 03 WHAT DRIVES ME ============= -->
+<section data-label="03 What Drives Me">
+  <div class="rail"><div><span class="num">03 / 17</span><span class="dot"></span>SECTION I</div><div>WHO I AM</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">What Drives Me</div>
+    <h2 class="display md" style="margin:18px 0 64px;">A mad scientist who once<br/>wanted to be an artist.</h2>
+  </div>
+  <div class="grid-3" style="margin-top:24px;">
+    <div class="card">
+      <div class="kicker">i. Values</div>
+      <p class="body sm">I want my work to mean something. What I build should genuinely improve people's lived experience — not just in theory, but in measurable ways. I'm especially drawn to combining systems engineering with psychology to develop frameworks for emerging issues at the intersection of mental health and technology, including the psychological effects of human–AI interaction.</p>
+    </div>
+    <div class="card">
+      <div class="kicker">ii. Interests</div>
+      <div style="margin-top:8px;">
+        <span class="tag">AI Systems</span>
+        <span class="tag">Robotics</span>
+        <span class="tag">Tattooing</span>
+        <span class="tag">Visual Art</span>
+        <span class="tag">Melee</span>
+        <span class="tag">Street Fighter</span>
+        <span class="tag">Tekken</span>
+        <span class="tag">2XKO</span>
+        <span class="tag">GG Strive</span>
+        <span class="tag">Research Papers</span>
+        <span class="tag">Video Essays</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kicker">iii. Personality</div>
+      <p class="body sm">Eccentric, curious, and openly enthusiastic about the ideas I'm working through. Analytical and experimental, with a creative core that still shapes how I approach problems. Easygoing and quick to joke — but I take the work itself seriously.</p>
+    </div>
+  </div>
+  <div class="footer"><div>BRITTON J. WERDELL</div><div>03 — DRIVERS</div></div>
+</section>
+
+<!-- ============= 04 MY SKILLS ============= -->
+<section data-label="04 My Skills">
+  <div class="rail"><div><span class="num">04 / 17</span><span class="dot"></span>SECTION I</div><div>WHO I AM</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">Capabilities</div>
+    <h2 class="display md" style="margin:18px 0 56px;">My Skills.</h2>
+  </div>
+  <div class="grid-4" style="margin-top:24px;">
+    <div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Technical</div>
+      <hr class="thin" style="margin:16px 0 24px;"/>
+      <ul class="dots">
+        <li>Python</li>
+        <li>AI systems engineering</li>
+        <li>Claude CLI</li>
+        <li>Data-driven system design</li>
+        <li>Research analysis</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Analytical</div>
+      <hr class="thin" style="margin:16px 0 24px;"/>
+      <ul class="dots">
+        <li>Critical thinking</li>
+        <li>Puzzle-solving</li>
+        <li>Disciplined studying</li>
+        <li>Reading research papers</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Creative</div>
+      <hr class="thin" style="margin:16px 0 24px;"/>
+      <ul class="dots">
+        <li>Drawing</li>
+        <li>Tattooing</li>
+        <li>Visual design</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Interpersonal</div>
+      <hr class="thin" style="margin:16px 0 24px;"/>
+      <ul class="dots">
+        <li>Active listening</li>
+        <li>Talk-based support</li>
+        <li>Building rapport</li>
+        <li>Collaborative problem-solving</li>
+      </ul>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:160px;left:120px;right:120px;">
+    <hr class="thin"/>
+    <p class="small italic" style="margin-top:18px;color:var(--muted-ink);max-width:1100px;">
+      Four columns, one operator. The technical and analytical columns fund the engineering work; the creative column funds the schooling; the interpersonal column is what makes any of it useful to anyone else.
+    </p>
+  </div>
+  <div class="footer"><div>BRITTON J. WERDELL</div><div>04 — SKILLS</div></div>
+</section>
+
+<!-- ============= 05 OUTSIDE THE CLASSROOM (PHOTO) ============= -->
+<section class="ink" data-label="05 Outside the Classroom" style="padding:0;">
+  <div class="rail" style="z-index:3;"><div><span class="num">05 / 17</span><span class="dot"></span>SECTION I</div><div>WHO I AM</div></div>
+  <div style="display:grid;grid-template-columns:7fr 5fr;height:100%;">
+    <div class="photo-frame" style="height:100%;">
+      <img class="photo" src="assets/patchwork.jpg" alt="Patchwork Smash Melee tournament"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg, transparent 60%, rgba(16,23,42,.6));pointer-events:none;"></div>
+    </div>
+    <div style="padding:96px 96px 88px 80px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div></div>
+      <div>
+        <div class="label" style="color:var(--gold);">Outside the Classroom</div>
+        <h2 class="display md" style="margin:18px 0 32px;color:var(--paper);font-size:88px;">A community<br/>of <em style="font-style:italic;color:var(--gold);">my own</em>.</h2>
+        <p class="body" style="color:rgba(241,236,223,.82);">Competing at <strong style="color:var(--paper);font-weight:600;">Patchwork</strong>, a Super Smash Bros. Melee tournament. Fighting games are a long-running interest of mine and a community I've built genuine connections through.</p>
+      </div>
+      <div style="margin-top:64px;border-top:1px solid rgba(241,236,223,.25);padding-top:24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:rgba(241,236,223,.55);">
+        <span>FIELD WORK</span><span>WILMINGTON, NC</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 06 DEGREE & EDUCATION GOALS ============= -->
+<section data-label="06 Degree and Goals">
+  <div class="rail"><div><span class="num">06 / 17</span><span class="dot"></span>SECTION II</div><div>THE PLAN</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">My Degree &amp; Education Goals</div>
+    <h2 class="display md" style="margin:18px 0 0;">From an A.S. to an<br/><em style="font-style:italic;color:var(--terra);">Intelligent Systems</em> degree.</h2>
+  </div>
+  <div class="grid-2-asym" style="margin-top:64px;">
+    <div>
+      <div class="card" style="border-top-color:var(--terra);border-top-width:3px;padding-top:20px;">
+        <div class="kicker">CFCC Degree</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1.1;color:var(--ink);">Associate in Science <span style="color:var(--muted-ink);">(A.S.)</span></div>
+      </div>
+      <div class="card" style="margin-top:36px;">
+        <div class="kicker">University Transfer</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1.1;color:var(--ink);">UNC Wilmington</div>
+      </div>
+      <div class="card" style="margin-top:36px;">
+        <div class="kicker">Intended Major</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1.1;color:var(--ink);">B.S., Intelligent Systems Engineering</div>
+        <div class="mono" style="margin-top:14px;color:var(--muted-ink);font-size:24px;letter-spacing:.14em;">CONCENTRATION · MACHINE LEARNING &amp; AI</div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="label">Why ISE?</div>
+      <p class="body sm">UNCW's Intelligent Systems Engineering program is a four-year interdisciplinary degree that bridges engineering and computing — the exact intersection my career goals live in. It combines hardware and software design, AI, and human-centered engineering, supported by faculty with strengths in machine learning, robotics, and the Internet of Things.</p>
+      <p class="body sm">The program is built around outcomes I genuinely care about: understanding the societal impact of AI, designing systems that work in real-world conditions, and communicating complex engineering solutions effectively.</p>
+      <p class="body sm" style="border-left:3px solid var(--terra);padding-left:24px;font-style:italic;color:var(--ink);">
+        The ML &amp; AI concentration directly aligns with my interest in cognitive systems and accessibility technology — where ML-driven design meaningfully improves lived experience.
+      </p>
+    </div>
+  </div>
+  </section>
+
+<!-- ============= 07 CFCC COURSE PLAN ============= -->
+<section data-label="07 CFCC Course Plan">
+  <div class="rail"><div><span class="num">07 / 17</span><span class="dot"></span>SECTION II</div><div>THE PLAN</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">My CFCC Course Plan</div>
+    <h2 class="display sm" style="margin:18px 0 12px;">Courses for the A.S. — built against UNCW's official BDP.</h2>
+  </div>
+  <div style="margin-top:36px;">
+    <div class="course-row">
+      <div class="cat">English Composition</div>
+      <div class="courses">ENG 111 Writing &amp; Inquiry <span class="mono" style="color:var(--muted-ink);font-size:24px;">(3 cr)</span> &nbsp;·&nbsp; ENG 112 Writing &amp; Research in the Disciplines <span class="mono" style="color:var(--muted-ink);font-size:24px;">(3 cr)</span></div>
+    </div>
+    <div class="course-row">
+      <div class="cat">Mathematics</div>
+      <div class="courses">MAT 172 Precalculus Trig <span class="mono" style="color:var(--muted-ink);font-size:24px;">(4)</span> &nbsp;·&nbsp; MAT 271 Calculus I <span class="mono" style="color:var(--muted-ink);font-size:24px;">(4)</span> &nbsp;·&nbsp; MAT 272 Calculus II <span class="mono" style="color:var(--muted-ink);font-size:24px;">(4)</span></div>
+    </div>
+    <div class="course-row">
+      <div class="cat">Natural Sciences</div>
+      <div class="courses">PHY 251 General Physics I <span class="mono" style="color:var(--muted-ink);font-size:24px;">(4)</span> &nbsp;·&nbsp; PHY 252 General Physics II <span class="mono" style="color:var(--muted-ink);font-size:24px;">(4)</span></div>
+    </div>
+    <div class="course-row">
+      <div class="cat">Engineering &amp; Programming</div>
+      <div class="courses">EGR 150 Intro to Engineering <span class="mono" style="color:var(--muted-ink);font-size:24px;">(2)</span> &nbsp;·&nbsp; CIS 133 C &nbsp;·&nbsp; CIS 134 C++ &nbsp;<span class="mono" style="color:var(--terra);font-size:24px;">≡ ISE 211</span></div>
+    </div>
+    <div class="course-row">
+      <div class="cat">Wellness &amp; Transition</div>
+      <div class="courses">PED 110 Fit and Well for Life <span class="mono" style="color:var(--muted-ink);font-size:24px;">(2)</span> &nbsp;·&nbsp; ACA 122 Transfer &amp; Career Success <span class="mono" style="color:var(--muted-ink);font-size:24px;">(1)</span></div>
+    </div>
+    <div class="course-row">
+      <div class="cat">Foreign Language</div>
+      <div class="courses">CHI 111 Elementary Mandarin I <span class="mono" style="color:var(--muted-ink);font-size:24px;">(3)</span> &nbsp;·&nbsp; CHI 112 Elementary Mandarin II <span class="mono" style="color:var(--muted-ink);font-size:24px;">(3)</span></div>
+    </div>
+    <div class="course-row">
+      <div class="cat">Humanities &amp; Fine Arts</div>
+      <div class="courses">ART 121 Two-Dimensional Design &nbsp;·&nbsp; ART 131 Drawing I &nbsp;<span class="mono" style="color:var(--muted-ink);font-size:24px;">(6 cr total)</span></div>
+    </div>
+    <div class="course-row">
+      <div class="cat">Social / Behavioral</div>
+      <div class="courses">PSY 150 General Psychology &nbsp;·&nbsp; second SBS course of choice &nbsp;<span class="mono" style="color:var(--muted-ink);font-size:24px;">(6 cr total)</span></div>
+    </div>
+    <div class="course-row" style="border-bottom:none;">
+      <div class="cat">Pre-Major / Open</div>
+      <div class="courses">Selected based on cross-disciplinary interests.</div>
+    </div>
+  </div>
+  </section>
+
+<!-- ============= 08 ELECTIVE REASONING ============= -->
+<section class="ink" data-label="08 Elective Reasoning">
+  <div class="rail"><div><span class="num">08 / 17</span><span class="dot"></span>SECTION II</div><div>THE PLAN</div></div>
+  <div style="padding-top:40px;">
+    <div class="label" style="color:var(--gold);">My Reasoning for Elective Choices</div>
+    <h2 class="display md" style="margin:18px 0 12px;color:var(--paper);">Electives are not filler.<br/>They are <em style="font-style:italic;color:var(--gold);">leverage</em>.</h2>
+  </div>
+  <p class="body sm" style="color:rgba(241,236,223,.78);max-width:1400px;margin-top:20px;">
+    The core ISE curriculum — Calculus, Physics, programming, engineering foundations — is rigorous and prescriptive. I've used my elective slots intentionally, with two priorities:
+  </p>
+  <div class="grid-3" style="margin-top:36px;gap:56px;">
+    <div>
+      <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:80px;line-height:1;color:var(--gold);">i.</div>
+      <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);">Sustain the Craft</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.1;margin:12px 0 14px;color:var(--paper);">The discipline that funds the degree.</div>
+      <p style="font-size:24px;line-height:1.45;color:rgba(241,236,223,.78);">Tattooing isn't just income — it's an active creative practice that requires continuous skill development. Studio art electives invest in the same skillset that pays my tuition.</p>
+    </div>
+    <div>
+      <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:80px;line-height:1;color:var(--gold);">ii.</div>
+      <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);">Cross-Disciplinary Insight</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.1;margin:12px 0 14px;color:var(--paper);">Engineering for actual humans.</div>
+      <p style="font-size:24px;line-height:1.45;color:rgba(241,236,223,.78);">I'm building technology to serve people — particularly cognitive systems &amp; accessibility. Psychology gives me a foundation for the human–AI interaction research I want to do.</p>
+    </div>
+    <div>
+      <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:80px;line-height:1;color:var(--gold);">iii.</div>
+      <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);">Mandarin, not Spanish</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.1;margin:12px 0 14px;color:var(--paper);">A long-term language bet.</div>
+      <p style="font-size:24px;line-height:1.45;color:rgba(241,236,223,.78);">I already speak Spanish. Cutting-edge work in AI, robotics, and intelligent systems is happening in Mandarin-speaking research communities. Literacy opens access I'd otherwise be locked out of.</p>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:80px;left:120px;right:120px;border-top:1px solid rgba(241,236,223,.25);padding-top:18px;">
+    <p class="italic" style="font-size:24px;line-height:1.4;color:rgba(241,236,223,.7);max-width:1500px;">
+      The future of engineering won't reward purely technical specialists. It will reward people who move between disciplines, translate between technical and human concerns, and see the full landscape of a problem.
+    </p>
+  </div>
+</section>
+
+<!-- ============= 09 TRANSFER ADMISSIONS PLAN ============= -->
+<section data-label="09 Transfer Plan">
+  <div class="rail"><div><span class="num">09 / 17</span><span class="dot"></span>SECTION III</div><div>TRANSFER STRATEGY</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">My Transfer Admissions Plan</div>
+    <h2 class="display md" style="margin:18px 0 0;">Two guaranteed-admission<br/>doors at <em style="font-style:italic;color:var(--terra);">UNCW</em>.</h2>
+  </div>
+  <div class="grid-2" style="margin-top:64px;">
+    <div>
+      <div class="label">Target</div>
+      <hr class="thin" style="margin:14px 0 22px;"/>
+      <table style="width:100%;border-collapse:collapse;font-size:24px;line-height:1.5;">
+        <tr><td class="mono" style="color:var(--terra);font-size:24px;letter-spacing:.12em;text-transform:uppercase;padding:12px 0;width:200px;">University</td><td style="padding:12px 0;">UNC Wilmington <span class="mono" style="color:var(--muted-ink);font-size:24px;">(UNCW)</span></td></tr>
+        <tr><td class="mono" style="color:var(--terra);font-size:24px;letter-spacing:.12em;text-transform:uppercase;padding:12px 0;border-top:1px solid rgba(74,68,52,.25);">Program</td><td style="padding:12px 0;border-top:1px solid rgba(74,68,52,.25);">B.S. Intelligent Systems Engineering</td></tr>
+        <tr><td class="mono" style="color:var(--terra);font-size:24px;letter-spacing:.12em;text-transform:uppercase;padding:12px 0;border-top:1px solid rgba(74,68,52,.25);">Concentration</td><td style="padding:12px 0;border-top:1px solid rgba(74,68,52,.25);">Machine Learning &amp; AI</td></tr>
+        <tr><td class="mono" style="color:var(--terra);font-size:24px;letter-spacing:.12em;text-transform:uppercase;padding:12px 0;border-top:1px solid rgba(74,68,52,.25);">Pathway</td><td style="padding:12px 0;border-top:1px solid rgba(74,68,52,.25);">CFCC A.S. → UNCW B.S. via CAA</td></tr>
+      </table>
+      <div style="margin-top:48px;padding:24px;border:1px solid var(--rule-paper);">
+        <div class="mono" style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);margin-bottom:8px;">Strategy</div>
+        <p class="small" style="color:var(--ink);margin:0;">UNCW's official 2024–25 AS-to-ISE transfer guide is the framework for every CFCC course I select. Completing the A.S. before transfer qualifies me for the University Studies waiver under the CAA — UNCW gen-ed considered fulfilled.</p>
+      </div>
+    </div>
+    <div>
+      <div class="label">Two Doors</div>
+      <hr class="thin" style="margin:14px 0 22px;"/>
+      <div style="border:1px solid var(--rule-paper);padding:32px;background:var(--paper-2);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <div style="font-family:'Instrument Serif',serif;font-size:42px;line-height:1;">PathWays</div>
+          <div class="mono" style="font-size:24px;letter-spacing:.14em;color:var(--terra);">DOOR ONE</div>
+        </div>
+        <p class="small" style="margin-top:16px;">UNCW's guaranteed-admission program for NC community college students completing an AA, AS, AE, AATP, ASTP, or AFA. Early access to transfer resources, advising from a transfer success coach, and an application-fee waiver. Open year-round.</p>
+      </div>
+      <div style="border:1px solid var(--rule-paper);padding:32px;margin-top:24px;background:var(--paper-2);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <div style="font-family:'Instrument Serif',serif;font-size:42px;line-height:1;">Pre-Hawk</div>
+          <div class="mono" style="font-size:24px;letter-spacing:.14em;color:var(--terra);">DOOR TWO</div>
+        </div>
+        <p class="small" style="margin-top:16px;">Direct-admit partnership for students with 3.2+ GPA &amp; 12–30 credit hours. Includes direct admission to UNCW, a free sponsored class while at CFCC, a one-time <strong>$2,000</strong> first-year scholarship, and a dedicated UNCW advisor and mentor.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<!-- ============= 10 UNCW ADMISSIONS REQUIREMENTS ============= -->
+<section data-label="10 Admission Requirements">
+  <div class="rail"><div><span class="num">10 / 17</span><span class="dot"></span>SECTION III</div><div>TRANSFER STRATEGY</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">UNCW Admission Requirements</div>
+    <h2 class="display sm" style="margin:18px 0 0;">What it takes to walk through the door.</h2>
+  </div>
+  <div class="grid-2" style="margin-top:56px;gap:96px;">
+    <div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Standard Transfer</div>
+      <hr class="thin" style="margin:16px 0 24px;"/>
+      <ul class="dots">
+        <li>Graduated from high school or earned GED</li>
+        <li>Met UNC System minimum HS course reqs <span class="mono" style="color:var(--muted-ink);font-size:24px;">(or exempt at 21+ / 24 transferable cr)</span></li>
+        <li>Completed or enrolled in 24 hours of transferable undergraduate credit</li>
+        <li>Recommended minimum <strong>2.4</strong> college GPA</li>
+        <li>Completed or enrolled in college-level English &amp; math</li>
+        <li>Official transcripts from all previous colleges &amp; high school</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Specific to ISE</div>
+      <hr class="thin" style="margin:16px 0 24px;"/>
+      <ul class="dots">
+        <li>Strong performance in math &amp; science <span class="mono" style="color:var(--muted-ink);font-size:24px;">(Calc I/II, Physics I/II)</span></li>
+        <li>Foundational programming coursework <span class="mono" style="color:var(--muted-ink);font-size:24px;">(CIS 133 + CIS 134)</span></li>
+        <li>Foreign language proficiency through 102 level <span class="mono" style="color:var(--muted-ink);font-size:24px;">(satisfied via CHI 111 + CHI 112)</span></li>
+      </ul>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:170px;left:120px;right:120px;border-top:1px solid var(--rule-paper);padding-top:24px;">
+    <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);margin-bottom:18px;">Application Logistics</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;">
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:48px;line-height:1;color:var(--ink);">$90<span style="font-size:24px;color:var(--muted-ink);"> &nbsp;fee</span></div>
+        <div class="small mono" style="color:var(--muted-ink);font-size:24px;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;">WAIVED VIA PATHWAYS</div>
+      </div>
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:36px;line-height:1.15;color:var(--ink);">Feb 1 · Mar 1 · Jun 1 · Oct 15</div>
+        <div class="small mono" style="color:var(--muted-ink);font-size:24px;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;">APPLICATION DEADLINES</div>
+      </div>
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:48px;line-height:1;color:var(--ink);">March 1</div>
+        <div class="small mono" style="color:var(--muted-ink);font-size:24px;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;">FIN-AID PRIORITY DEADLINE</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>BRITTON J. WERDELL</div><div>10 — REQUIREMENTS</div></div>
+</section>
+
+<!-- ============= 11 FINANCIAL PLAN ============= -->
+<section class="ink" data-label="11 Financial Plan">
+  <div class="rail"><div><span class="num">11 / 17</span><span class="dot"></span>SECTION III</div><div>TRANSFER STRATEGY</div></div>
+  <div style="padding-top:40px;">
+    <div class="label" style="color:var(--gold);">My Financial Plan</div>
+    <h2 class="display md" style="margin:18px 0 0;color:var(--paper);">A self-funded education, by design.</h2>
+  </div>
+  <div class="grid-2" style="margin-top:56px;gap:96px;">
+    <div>
+      <div class="label" style="color:var(--gold);">Estimated Yearly Costs · UNCW 2025–26 · In-State</div>
+      <div style="margin-top:24px;">
+        <div style="display:grid;grid-template-columns:1fr auto;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(241,236,223,.18);">
+          <span class="body" style="color:rgba(241,236,223,.85);">Tuition <span class="mono" style="color:rgba(241,236,223,.5);font-size:24px;">in-state undergrad</span></span>
+          <span style="font-family:'Instrument Serif',serif;font-size:38px;color:var(--paper);">~$4,443</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(241,236,223,.18);">
+          <span class="body" style="color:rgba(241,236,223,.85);">University fees</span>
+          <span style="font-family:'Instrument Serif',serif;font-size:38px;color:var(--paper);">~$2,321</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(241,236,223,.18);">
+          <span class="body" style="color:rgba(241,236,223,.85);">Books &amp; supplies</span>
+          <span style="font-family:'Instrument Serif',serif;font-size:38px;color:var(--paper);">~$1,000</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;align-items:baseline;padding:24px 0 18px;border-bottom:2px solid var(--gold);">
+          <span class="mono" style="color:var(--gold);font-size:24px;letter-spacing:.14em;text-transform:uppercase;">Tuition + Fees</span>
+          <span style="font-family:'Instrument Serif',serif;font-size:54px;color:var(--gold);">~$7,764</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;align-items:baseline;padding:18px 0;">
+          <span class="body sm" style="color:rgba(241,236,223,.65);">Estimated total cost of attendance <span class="mono" style="font-size:24px;">incl. housing, food, transit</span></span>
+          <span style="font-family:'Instrument Serif',serif;font-size:38px;color:rgba(241,236,223,.85);">~$28,000</span>
+        </div>
+      </div>
+      <p class="small italic" style="color:rgba(241,236,223,.65);margin-top:24px;">
+        UNCW's Fixed Tuition Program locks in tuition for incoming cohorts. Average net price after scholarships and grants is ~<strong style="color:var(--gold);font-style:normal;">$18,709</strong>; 46% of students receive financial aid.
+      </p>
+    </div>
+    <div>
+      <div class="label" style="color:var(--gold);">How I Plan to Pay for It</div>
+      <div style="margin-top:24px;display:flex;flex-direction:column;gap:22px;">
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:24px;padding-bottom:14px;border-bottom:1px solid rgba(241,236,223,.18);">
+          <div class="mono" style="color:var(--gold);font-size:24px;">i.</div>
+          <div>
+            <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--paper);line-height:1.05;">Tattoo income</div>
+            <p style="font-size:24px;line-height:1.4;margin-top:6px;color:rgba(241,236,223,.75);">Primary self-funded contribution. Consistent, flexible income that scales with hours — and the reason I've prioritized art electives at CFCC.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:24px;padding-bottom:14px;border-bottom:1px solid rgba(241,236,223,.18);">
+          <div class="mono" style="color:var(--gold);font-size:24px;">ii.</div>
+          <div>
+            <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--paper);line-height:1.05;">FAFSA &amp; federal aid</div>
+            <p style="font-size:24px;line-height:1.4;margin-top:6px;color:rgba(241,236,223,.75);">Filing each year by UNCW's <strong style="color:var(--paper);">March 1</strong> priority deadline to maximize grants and subsidized loans.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:24px;padding-bottom:14px;border-bottom:1px solid rgba(241,236,223,.18);">
+          <div class="mono" style="color:var(--gold);font-size:24px;">iii.</div>
+          <div>
+            <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--paper);line-height:1.05;">Scholarship stack</div>
+            <p style="font-size:24px;line-height:1.4;margin-top:6px;color:rgba(241,236,223,.75);">Pre-Hawk $2,000 first-year · UNCW general scholarship app · CFCC Foundation · CSE major awards.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:24px;">
+          <div class="mono" style="color:var(--gold);font-size:24px;">iv.</div>
+          <div>
+            <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--paper);line-height:1.05;">Living locally</div>
+            <p style="font-size:24px;line-height:1.4;margin-top:6px;color:rgba(241,236,223,.75);">Staying in Wilmington keeps housing costs significantly lower than relocating.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 12 INVOLVEMENT AT UNCW ============= -->
+<section data-label="12 Involvement at UNCW">
+  <div class="rail"><div><span class="num">12 / 17</span><span class="dot"></span>SECTION IV</div><div>ON CAMPUS</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">How I'll Get Involved at UNCW</div>
+    <h2 class="display md" style="margin:18px 0 0;">Two communities,<br/>both <em style="font-style:italic;color:var(--terra);">already mine</em>.</h2>
+  </div>
+  <div class="grid-2" style="margin-top:64px;gap:80px;">
+    <div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">i. Community-Driven</div>
+      <hr class="thin" style="margin:16px 0 28px;"/>
+      <div style="font-family:'Instrument Serif',serif;font-size:56px;line-height:1.05;color:var(--ink);">Seahawk Esports Club</div>
+      <div style="margin-top:24px;display:flex;gap:48px;">
+        <div>
+          <div style="font-family:'Instrument Serif',serif;font-size:64px;color:var(--terra);line-height:1;">500+</div>
+          <div class="mono" style="font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-ink);margin-top:6px;">STUDENTS</div>
+        </div>
+        <div>
+          <div style="font-family:'Instrument Serif',serif;font-size:64px;color:var(--terra);line-height:1;">24/7</div>
+          <div class="mono" style="font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-ink);margin-top:6px;">LAB ACCESS</div>
+        </div>
+      </div>
+      <p style="font-size:24px;line-height:1.4;margin-top:24px;">More than 500 students, competitive teams, campus events, and broader esports connections. With deep roots in the FGC — Melee, Street Fighter, Tekken, 2XKO, Strive — this is the most natural community for me on campus.</p>
+    </div>
+    <div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">ii. Research-Driven</div>
+      <hr class="thin" style="margin:16px 0 28px;"/>
+      <div style="font-family:'Instrument Serif',serif;font-size:56px;line-height:1.05;color:var(--ink);">CSE Research &amp; Capstone</div>
+      <p style="font-size:24px;line-height:1.4;margin-top:24px;">ISE is supported by faculty with active research in ML, AI, robotics, IoT, and cyber-physical systems. With a long-term goal of R&amp;D in cognitive systems and accessibility, getting involved early is essential.</p>
+      <div style="margin-top:24px;display:flex;flex-direction:column;gap:14px;">
+        <div style="display:grid;grid-template-columns:30px 1fr;gap:16px;align-items:baseline;"><span class="mono" style="color:var(--terra);font-size:24px;">→</span><span class="small" style="font-size:24px;">Identify ISE faculty whose work aligns with my interests in semester one.</span></div>
+        <div style="display:grid;grid-template-columns:30px 1fr;gap:16px;align-items:baseline;"><span class="mono" style="color:var(--terra);font-size:24px;">→</span><span class="small" style="font-size:24px;">Pursue undergraduate research opportunities &amp; independent-study credits.</span></div>
+        <div style="display:grid;grid-template-columns:30px 1fr;gap:16px;align-items:baseline;"><span class="mono" style="color:var(--terra);font-size:24px;">→</span><span class="small" style="font-size:24px;">Use the ISE 461 / 462 capstone to build a project tied to my long-term direction.</span></div>
+      </div>
+    </div>
+  </div>
+  
+  </section>
+
+<!-- ============= 13 LITERATURE REVIEW ============= -->
+<section data-label="13 Literature Review">
+  <div class="rail"><div><span class="num">13 / 17</span><span class="dot"></span>SECTION V</div><div>WORK SAMPLES</div></div>
+  <div class="grid-2-asym" style="height:100%;align-items:start;padding-top:32px;gap:64px;">
+    <div>
+      <div class="label">Work Sample · ENG 202</div>
+      <h2 class="display sm" style="margin:14px 0 18px;font-size:58px;line-height:1.05;">The Environmental<br/>Impacts of the<br/><em style="color:var(--terra);font-style:italic;">Wilmington Harbor 403</em><br/>Deepening Project.</h2>
+      <div class="mono" style="font-size:24px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-ink);">ENG 202 · ARGUMENTATIVE RESEARCH · SPRING 2026</div>
+      <div style="margin-top:64px;border-left:3px solid var(--terra);padding:8px 0 8px 28px;">
+        <p class="pull" style="font-size:38px;line-height:1.2;">"This matters for the Wilmington community because the Cape Fear River is not just a navigation channel for large vessels, but a critical source of drinking water, coastal ecosystems, and resilience against rising ocean levels."</p>
+        <div class="mono" style="font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-ink);margin-top:18px;">— FROM THE CLOSING OF MY LITERATURE REVIEW</div>
+      </div>
+    </div>
+    <div class="stack" style="--gap:14px;">
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">The Question</div>
+        <hr class="thin" style="margin:14px 0 18px;"/>
+        <p class="body sm">What are the potential ecological and public-health consequences of the Wilmington Harbor 403 Deepening Project — the proposal to deepen the Cape Fear River's federal navigation channel from <strong>44 ft</strong> to <strong>47 ft</strong>?</p>
+      </div>
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Why this topic</div>
+        <hr class="thin" style="margin:14px 0 18px;"/>
+        <p class="body sm">The Cape Fear River runs through Wilmington — the city I live in and the city I'm transferring to UNCW in. Harbor 403 is an active proposal with real consequences for local ecology, drinking water, and coastal resilience.</p>
+      </div>
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Approach · three themes</div>
+        <hr class="thin" style="margin:14px 0 18px;"/>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;">
+          <div style="padding:16px;border:1px solid var(--rule-paper);"><div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">01</div><div style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1.1;margin-top:6px;">Habitat disruption</div></div>
+          <div style="padding:16px;border:1px solid var(--rule-paper);"><div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">02</div><div style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1.1;margin-top:6px;">PFAS contamination</div></div>
+          <div style="padding:16px;border:1px solid var(--rule-paper);"><div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">03</div><div style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1.1;margin-top:6px;">Mitigation oversight gaps</div></div>
+        </div>
+        <p class="small mono" style="margin-top:14px;color:var(--muted-ink);font-size:24px;">SOURCES: Kotlarz et al. · Culbertson · Parsons et al. · investigative journalism · Draft EIS</p>
+      </div>
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);">Conclusion</div>
+        <hr class="thin" style="margin:14px 0 18px;"/>
+        <p style="font-size:24px;line-height:1.35;">The peer-reviewed research, journalism, and technical review demonstrate that the project's environmental analysis underestimates compounding risks — and proposed mitigation does not credibly offset the projected damage. A more comprehensive review is necessary before a project of this scale moves forward.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<!-- ============= 14 MINDLOCK ============= -->
+<section class="ink" data-label="14 Mindlock">
+  <div class="rail"><div><span class="num">14 / 17</span><span class="dot"></span>SECTION V</div><div>WORK SAMPLES</div></div>
+  <div class="grid-2-asym" style="height:100%;align-items:start;padding-top:40px;gap:80px;">
+    <div>
+      <div class="label" style="color:var(--gold);">Independent Project</div>
+      <h2 class="display" style="font-size:144px;line-height:.95;margin:24px 0 24px;color:var(--paper);">Mindlock<span style="color:var(--gold);">.</span></h2>
+      <p class="body" style="color:rgba(241,236,223,.85);">A multi-agent AI harness with self-recursive improvement.<br/><span class="mono" style="color:var(--gold);font-size:24px;letter-spacing:.14em;text-transform:uppercase;">STATUS · IN ACTIVE DEVELOPMENT</span></p>
+      <div style="margin-top:48px;">
+        <div class="label" style="color:var(--gold);">Tech Stack</div>
+        <div style="margin-top:14px;">
+          <span class="tag">Python</span><span class="tag">Rust</span><span class="tag">Claude API</span><span class="tag">OpenAI API</span><span class="tag">Docker</span><span class="tag">Cloudflare</span><span class="tag">Stripe</span><span class="tag">Git</span><span class="tag">JSON</span>
+        </div>
+      </div>
+      <div style="margin-top:32px;border-top:1px solid rgba(241,236,223,.25);padding-top:18px;">
+        <p style="font-size:24px;line-height:1.35;color:rgba(241,236,223,.85);font-style:italic;">This is the project that connects the portfolio — AI work, cognitive-systems research, cross-disciplinary thinking. Evidence I'm already doing the work.</p>
+      </div>
+    </div>
+    <div class="stack" style="--gap14:1;gap:0;">
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);">What It Is</div>
+        <hr class="thin" style="margin:14px 0 18px;border-color:rgba(241,236,223,.25);"/>
+        <p style="font-size:24px;line-height:1.3;color:rgba(241,236,223,.82);">A multi-agent AI system I'm building as a daily-driver IDE. It coordinates specialized agents to tackle long-horizon engineering projects. Human-in-the-loop intention mapping keeps the system aligned with the operator's goals.</p>
+      </div>
+      <div class="mock">
+        <div class="sys"># mindlock — new session</div>
+        <div style="margin-top:12px;">
+          <span class="cmt">// agent roster</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 28px;margin-top:8px;">
+          <div><span class="agt">▸ planner</span> &nbsp; <span class="sys">orchestrate goals</span></div>
+          <div><span class="agt">▸ researcher</span> &nbsp; <span class="sys">gather context</span></div>
+          <div><span class="agt">▸ critic</span> &nbsp; <span class="sys">stress-test plans</span></div>
+          <div><span class="agt">▸ executor</span> &nbsp; <span class="sys">run actions</span></div>
+          <div><span class="agt">▸ scribe</span> &nbsp; <span class="sys">log + summarize</span></div>
+          <div><span class="agt">▸ scientist</span> &nbsp; <span class="sys">hypothesize</span></div>
+          <div><span class="agt">▸ designer</span> &nbsp; <span class="sys">visual reasoning</span></div>
+          <div><span class="agt">▸ pixel</span> &nbsp; <span class="sys">render &amp; UI</span></div>
+          <div><span class="agt">▸ commerce</span> &nbsp; <span class="sys">cost / billing</span></div>
+          <div><span class="agt">▸ sentinel</span> &nbsp; <span class="sys">guardrails</span></div>
+          <div><span class="agt">▸ unreal</span> &nbsp; <span class="sys">simulation</span></div>
+        </div>
+        <div style="margin-top:14px;border-top:1px solid rgba(241,236,223,.15);padding-top:12px;">
+          <span class="cmt">// active project context: mindlock-self</span><br/>
+          <span class="ok">✓ autopilot · self-improvement loop online</span><br/>
+          <span class="warn">⚠ awaiting human-in-loop intention map</span>
+        </div>
+      </div>
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);">Self-Improvement Layer</div>
+        <hr class="thin" style="margin:12px 0 14px;border-color:rgba(241,236,223,.25);"/>
+        <p style="font-size:24px;line-height:1.3;color:rgba(241,236,223,.82);">Mindlock currently targets itself. An autopilot drives implementation and debugging — agents improving the system that produced them, under human oversight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 15 EXPERIENCE & COMMUNITY ============= -->
+<section data-label="15 Experience">
+  <div class="rail"><div><span class="num">15 / 17</span><span class="dot"></span>SECTION VI</div><div>RECORD</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">Experience &amp; Community Involvement</div>
+    <h2 class="display md" style="margin:18px 0 56px;">A record beyond the transcript.</h2>
+  </div>
+  <div class="grid-2" style="gap:80px;">
+    <div>
+      <div class="card">
+        <div class="kicker">IT Team Experience</div>
+        <div class="title" style="font-size:36px;">Hands-on technical infrastructure</div>
+        <ul class="dots" style="margin-top:8px;">
+          <li><strong>Fishers High School</strong> <span class="mono" style="color:var(--muted-ink);font-size:24px;">— Indiana</span> · IT team member, hands-on tech support &amp; infrastructure work in a school environment.</li>
+          <li><strong>Ivy Tech Community College</strong> <span class="mono" style="color:var(--muted-ink);font-size:24px;">— Indiana</span> · IT team experience supporting a community college environment.</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:48px;">
+        <div class="kicker">Independent Development</div>
+        <div class="title" style="font-size:36px;">Solo &amp; collaborative AI / tech projects</div>
+        <p class="body sm" style="margin-top:6px;">Ongoing development on Mindlock. Additional dev-team experience under non-disclosure agreements.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="kicker">Community Service</div>
+        <div class="title" style="font-size:36px;">Third Phase, Battered Women's Shelter</div>
+        <p class="body sm" style="margin-top:6px;">Volunteer service supporting a critical local resource for survivors of domestic violence.</p>
+      </div>
+      <div class="card" style="margin-top:48px;">
+        <div class="kicker">Creative &amp; Self-Funded</div>
+        <div class="title" style="font-size:36px;">Practicing tattoo artist · FGC member</div>
+        <p class="body sm" style="margin-top:6px;">Self-employment that funds my education and sustains the artistic discipline I draw on across all of my work. Active member of the competitive fighting-game community — Smash Melee, Street Fighter, Tekken, 2XKO, Strive — built community through tournaments including <strong>Patchwork</strong>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>BRITTON J. WERDELL</div><div>15 — RECORD</div></div>
+</section>
+
+<!-- ============= 16 FINAL REFLECTION ============= -->
+<section class="ink" data-label="16 Final Reflection">
+  <div class="rail"><div><span class="num">16 / 17</span><span class="dot"></span>SECTION VII</div><div>REFLECTION</div></div>
+  <div style="padding-top:40px;">
+    <div class="label" style="color:var(--gold);">Final Reflection</div>
+    <h2 class="display md" style="margin:18px 0 56px;color:var(--paper);">From <em style="font-style:italic;color:var(--gold);">reactive</em> to deliberate.</h2>
+  </div>
+  <div class="grid-2" style="gap:96px;">
+    <div class="stack">
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);">What ACA 122 Taught Me</div>
+        <hr class="thin" style="margin:14px 0 18px;border-color:rgba(241,236,223,.3);"/>
+        <p class="body sm" style="color:rgba(241,236,223,.85);">Before this class, my approach to college was reactive — show up, do the work, figure out the next step when it arrived. Working through the University Research Table, the BDP analysis, and this portfolio forced me to build an actual plan: a target program, course sequence, transfer timeline, and financial strategy.</p>
+        <p class="body sm" style="margin-top:14px;color:rgba(241,236,223,.85);">The class also introduced me to the SMART goals framework, which I've applied directly inside Mindlock's planning agents to keep long-horizon projects from drifting. That's the cross-application I value: a planning concept from a college-success class becoming a usable component in a multi-agent AI system.</p>
+      </div>
+    </div>
+    <div class="stack">
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);">Where I Feel Confident</div>
+        <hr class="thin" style="margin:14px 0 18px;border-color:rgba(241,236,223,.3);"/>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:12px 20px;font-size:24px;line-height:1.4;color:rgba(241,236,223,.85);">
+          <span class="mono" style="color:var(--gold);">→</span><span><strong style="color:var(--paper);">Field of study</strong> — confident in the direction toward AI &amp; intelligent systems engineering.</span>
+          <span class="mono" style="color:var(--gold);">→</span><span><strong style="color:var(--paper);">Academic transfer plan</strong> — targeting Spring/Summer 2027 transfer to UNCW.</span>
+          <span class="mono" style="color:var(--gold);">→</span><span><strong style="color:var(--paper);">Financial plan</strong> — stable tattoo income + scholarship strategy through PathWays, Pre-Hawk, FAFSA, &amp; UNCW general.</span>
+        </div>
+      </div>
+      <div>
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);">What I Still Need to Do</div>
+        <hr class="thin" style="margin:14px 0 18px;border-color:rgba(241,236,223,.3);"/>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-family:'JetBrains Mono',monospace;font-size:24px;line-height:1.6;color:rgba(241,236,223,.78);">
+          <div>☐ Submit PathWays enrollment</div>
+          <div>☐ Apply to Pre-Hawk</div>
+          <div>☐ Verify A.S. courses w/ advisor</div>
+          <div>☐ Confirm CIS 133 / 134 availability</div>
+          <div>☐ File FAFSA by March 1</div>
+          <div>☐ Apply for CSE major scholarships</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:50px;left:120px;right:120px;border-top:1px solid rgba(241,236,223,.3);padding-top:14px;">
+    <p class="italic" style="font-family:'Instrument Serif',serif;font-size:32px;color:rgba(241,236,223,.92);max-width:1900px;line-height:1.25;margin:0;">
+      The next two years are about turning the plan into the degree, and the degree into the work I actually want to do.
+    </p>
+  </div>
+</section>
+
+<!-- ============= 17 REFERENCES ============= -->
+<section data-label="17 References">
+  <div class="rail"><div><span class="num">17 / 17</span><span class="dot"></span>END MATTER</div><div>REFERENCES</div></div>
+  <div style="padding-top:40px;">
+    <div class="label">References</div>
+    <h2 class="display sm" style="margin:18px 0 12px;">Sources used in the Transfer &amp; Academic Plan sections.</h2>
+    <p class="small italic mono" style="color:var(--muted-ink);font-size:24px;letter-spacing:.04em;">FULL APA CITATIONS TO BE ADDED</p>
+  </div>
+  <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;column-gap:96px;row-gap:0;">
+    <div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">01</div>
+        <div class="courses ref"><strong>Cape Fear Community College.</strong> (n.d.). <em>Transfer programs and PathWays at UNCW.</em> cfcc.edu</div>
+      </div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">02</div>
+        <div class="courses ref"><strong>UNCW.</strong> (n.d.). <em>PathWays guaranteed-admission program.</em> uncw.edu/admissions/pathways</div>
+      </div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">03</div>
+        <div class="courses ref"><strong>UNCW.</strong> (n.d.). <em>Pre-Hawk direct-admit partnership with CFCC.</em> uncw.edu</div>
+      </div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">04</div>
+        <div class="courses ref"><strong>UNCW.</strong> (2024). <em>2024–2025 AS-to-ISE transfer guide.</em> uncw.edu/cse</div>
+      </div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;border-bottom:none;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">05</div>
+        <div class="courses ref"><strong>UNCW.</strong> (n.d.). <em>Seahawk Esports Club.</em> uncw.edu</div>
+      </div>
+    </div>
+    <div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">06</div>
+        <div class="courses ref"><strong>UNCW.</strong> (n.d.). <em>Tuition, fees, and financial aid — in-state undergraduate 2025–2026.</em> uncw.edu/finaid</div>
+      </div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">07</div>
+        <div class="courses ref"><strong>College Board.</strong> (2025). <em>UNCW net price and financial aid data.</em> collegeboard.org</div>
+      </div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">08</div>
+        <div class="courses ref"><strong>CollegeTuitionCompare.</strong> (2025). <em>UNCW Fixed Tuition Program details.</em> collegetuitioncompare.com</div>
+      </div>
+      <div class="course-row" style="grid-template-columns:60px 1fr;gap:24px;border-bottom:none;">
+        <div class="mono" style="font-size:24px;letter-spacing:.12em;color:var(--terra);">09</div>
+        <div class="courses ref"><strong>NC Community College System.</strong> (n.d.). <em>Comprehensive Articulation Agreement (CAA).</em> nccommunitycolleges.edu</div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:120px;left:120px;right:120px;border-top:1px solid var(--rule-paper);padding-top:24px;display:flex;justify-content:space-between;align-items:baseline;">
+    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:48px;color:var(--ink);">— end —</div>
+    <div class="mono" style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-ink);">Britton J. Werdell · ACA 122 · Spring 2026</div>
+  </div>
+</section>
+
+</deck-stage>
+
+</body>
+</html>
